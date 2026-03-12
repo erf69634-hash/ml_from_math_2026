@@ -1,4 +1,5 @@
 # 《fluent python》
+-----
 ## 零散知识点
 ### ！r   !s 
 在 Python 中，self.x!r 里的 !r 是 格式化字符串（f-string 或 str.format()）中的格式说明符，用于指定对象 x 的“表示形式”。
@@ -55,3 +56,26 @@ print('Hello,{!r}'.format(name))
 ### why len is not a method
 
 len不被调用为方法是因为它在Python数据模型中得到了特殊对待，就像abs一样。这种设计使得len在处理内置类型（如字符串、列表等）时非常高效，因为它可以直接从C结构体中读取长度，而不需要调用任何方法。此外，通过特殊方法__len__，用户也可以使len与自己自定义的对象一起工作，这既保证了内置对象的效率，又保持了语言的一致性.
+
+-----
+## array of sequence
+### built-in sequence
+- 容器序列 container sequence :
+可以存放不同类型的数据项，包括嵌套容器。例如：`list`、`tuple` 和 `collections.deque`。
+
+- 扁平序列 flat sequence :
+存放一种简单类型的数据项。例如：`str`、`bytes` 和 `array.array`。
+
+
+
+- 可变序列可以原地修改内容，不可变序列一旦创建就不能更改。
+
+内存层面
+不可变：修改会创建新对象，id 变化
+
+可变：修改不创建新对象，id 不变
+
+方法层面
+不可变（Sequence ABC）：只有读方法（__getitem__、count、index等）
+
+可变（MutableSequence ABC）：继承不可变所有方法，额外实现写方法（__setitem__、append、pop、extend等）
